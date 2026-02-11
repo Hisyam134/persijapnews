@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalinyamat Sector | Media Persijap Jepara</title>
+    <style>
+        :root {
+            --primary: #e63946;
+            --dark: #1d3557;
+            --light: #f1faee;
+            --white: #ffffff;
+            --border: #dee2e6;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background: #f8f9fa; color: var(--dark); overflow-x: hidden; }
+
+        /* --- 1. LOADING SCREEN --- */
+        #loader {
+            position: fixed; width: 100%; height: 100vh; background: var(--dark);
+            display: flex; flex-direction: column; justify-content: center;
+            align-items: center; z-index: 9999; transition: 0.5s;
+        }
+        /* Style untuk Logo Gambar di Loading Awal */
+.logo-anim-img {
+    width: 100px; /* Atur lebar logo */
+    height: auto;
+    animation: pulse-img 1.5s infinite;
+}
+
+@keyframes pulse-img {
+    0% { transform: scale(0.9); opacity: 0.8; }
+    70% { transform: scale(1.05); opacity: 1; }
+    100% { transform: scale(0.9); opacity: 0.8; }
+}
+
+        /* --- 2. TRANSITION LOADER --- */
+        #card-loader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(29, 53, 87, 0.98); display: none;
+            justify-content: center; align-items: center; z-index: 9998;
+        }
+        /* Style untuk Logo Gambar yang Memantul */
+.bounce-logo-img {
+    width: 80px; /* Atur lebar logo */
+    height: auto;
+    animation: bounce-img 0.5s infinite alternate;
+}
+
+@keyframes bounce-img {
+    from { transform: translateY(0); }
+    to { transform: translateY(-25px); }
+}
+
+        /* --- 3. HEADER --- */
+        header { 
+            background: var(--dark); padding: 15px; position: sticky; 
+            top: 0; z-index: 100; text-align: center;
+        }
+        header h1 { color: var(--primary); font-size: 1.3rem; letter-spacing: 2px; }
+        header span { color: var(--white); }
+
+        /* --- 4. PHOTO SLIDER --- */
+        .slider-container {
+            display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
+            padding: 20px; gap: 12px; scrollbar-width: none;
+        }
+        .slider-container::-webkit-scrollbar { display: none; }
+        .slide-item {
+            flex: 0 0 85%; scroll-snap-align: center; position: relative;
+            height: 180px; border-radius: 15px; overflow: hidden;
+        }
+        .slide-item img { width: 100%; height: 100%; object-fit: cover; }
+        .slide-caption {
+            position: absolute; bottom: 0; padding: 15px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white; width: 100%; font-size: 0.85rem;
+        }
+
+        /* --- 5. CARDS --- */
+        .content { padding: 0 20px; }
+        .section-title { font-size: 1.1rem; margin-bottom: 15px; border-left: 4px solid var(--primary); padding-left: 10px; }
+        
+        .card {
+            background: var(--white); border-radius: 15px; overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05); margin-bottom: 20px;
+        }
+        .card img { width: 100%; height: 180px; object-fit: cover; }
+        .card-body { padding: 15px; }
+        .card-title { font-size: 1.05rem; color: var(--dark); line-height: 1.4; }
+
+        /* --- 6. KLASEMEN AT THE BOTTOM --- */
+        .standings-section {
+            background: var(--white);
+            margin-top: 30px;
+            padding: 25px 20px 40px;
+            border-radius: 25px 25px 0 0;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
+        }
+        .standings-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        .standings-table th { text-align: left; padding: 12px; background: #f8f9fa; font-size: 0.75rem; color: var(--gray); }
+        .standings-table td { padding: 15px 12px; border-bottom: 1px solid #eee; font-size: 0.9rem; }
+        .pos { font-weight: bold; width: 30px; }
+        .team-name { font-weight: 600; }
+        .pts { font-weight: bold; color: var(--primary); text-align: right; }
+        .top-zone { border-left: 4px solid #4ade80; }
+
+        /* --- 7. STORY PAGE --- */
+        #story-page { display: none; padding: 20px; background: var(--white); min-height: 100vh; }
+        .btn-back { background: #eee; border: none; padding: 10px 20px; border-radius: 20px; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+
+<div id="loader">
+    <img src="20260101_131824.png" class="logo-anim-img" alt="Logo">
+    <p style="color: white; margin-top: 15px; letter-spacing: 3px; font-size: 0.8rem;">PERSIJAP</p>
+</div>
+
+<div id="card-loader">
+    <img src="20260101_131824.png" class="bounce-logo-img" alt="Logo">
+    <p style="color: white; margin-top: 20px; font-size: 0.9rem;">Memuat Data...</p>
+</div>
+
+
+    <header><h1>KALINYAMAT<span>SECTOR</span></h1></header>
+
+    <main id="home-page">
+        <div class="slider-container">
+            <div class="slide-item">
+                <img src="https://images.unsplash.com/photo-1551958219-acbc608c6377?w=600" alt="1">
+                <div class="slide-caption">Update: Info Persijap!</div>
+            </div>
+            <div class="slide-item">
+                <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=600" alt="2">
+                <div class="slide-caption">Persijap Jepara V Malut United</div>
+            </div>
+        </div>
+
+        <div class="content">
+            <h2 class="section-title">Berita Terbaru</h2>
+            
+<div class="card" onclick="showNews(
+    'Misi Curi Poin di Tanah Para Raja: Persijap Jepara Tantang Malut United Jumat Besok', 
+    'divaldo.jpg', 
+    'JEPARA – Ujian berat menanti Laskar Kalinyamat. Jumat besok, Persijap Jepara akan terbang jauh untuk menghadapi tantangan tuan rumah Malut United. Laga tandang ini menjadi momentum krusial bagi Persijap untuk membuktikan mentalitas mereka saat bermain di luar kandang.\n\nBermain di hadapan pendukung lawan tentu bukan perkara mudah. Namun, anak asuh pelatih Persijap datang dengan kepercayaan diri tinggi. Fokus utama tim saat ini adalah menjaga kedisiplinan lini belakang dan efektivitas dalam penyelesaian akhir. Mencuri poin di markas Laskar Kie Raha akan menjadi pencapaian luar biasa. Persijap diharapkan mampu meredam tekanan awal yang biasanya dilancarkan tim tuan rumah sejak peluit pertama dibunyikan.\n\nMalut United dikenal sebagai tim yang sangat tangguh saat bermain di hadapan publik sendiri. Dengan komposisi pemain yang sarat pengalaman di kasta tertinggi sepak bola Indonesia, Malut United diprediksi akan mengambil inisiatif serangan lebih dulu. Lini pertahanan Persijap yang digawangi oleh para pemain tangguhnya harus bekerja ekstra keras untuk mengawal pergerakan penyerang sayap Malut United yang dikenal lincah dan berani melakukan penetrasi.\n\nDalam laga tandang seperti ini, skema serangan balik cepat (counter-attack) kemungkinan besar akan menjadi senjata rahasia Persijap. Mengandalkan kecepatan para pemain sayap dan ketajaman striker tunggal di depan, Persijap berpotensi mengejutkan barisan pertahanan Malut United yang mungkin terlalu asyik menyerang.\n\nKondisi fisik menjadi perhatian utama karena perjalanan jauh menuju markas lawan menuntut manajemen recovery yang cepat. Selain itu, adaptasi cuaca dan disiplin taktis akan menjadi penentu apakah Laskar Kalinyamat mampu membawa pulang poin ke Bumi Kartini atau tidak. Mari kita berikan doa dan dukungan terbaik!')">
+    
+    <img src="divaldo.jpg" alt="Persijap Away Day">
+    <div class="card-body">
+        <h3 class="card-title">Misi Curi Poin di Tanah Para Raja: Persijap Tantang Malut United</h3>
+    </div>
+</div>
+
+
+<div class="card" onclick="showNews(
+    'Meski Terpisah Jarak, Doa Kolektif Suporter Jadi Energi Tambahan Laskar Kalinyamat', 
+    'persijap.jpg', 
+    'JEPARA – Jarak ribuan kilometer antara Jepara dan markas Malut United tidak menjadi penghalang bagi cinta para suporter kepada Persijap. Menjelang laga Jumat besok, gelombang dukungan di media sosial dan doa bersama di berbagai sudut Bumi Kartini mulai masif dilakukan oleh Banaspati, Jetman, dan seluruh elemen pencinta Persijap.\n\nBagi para pemain, dukungan ini adalah nyawa tambahan. Kapten tim Persijap menegaskan bahwa meskipun tribun stadion lawan mungkin tidak akan dipenuhi warna merah khas Jepara, namun semangat dari pesan-pesan dukungan yang masuk ke gawai para pemain sangat terasa. &quot;Kami bermain untuk harga diri Jepara. Kami tahu mereka menonton dan berdoa dari rumah, dan kami tidak ingin mengecewakan itu,&quot; ujarnya.\n\nFenomena nonton bareng (nobar) juga diprediksi akan menjamur di kafe-kafe dan balai desa di Jepara pada Jumat sore nanti. Kebersamaan dalam mendukung tim kebanggaan saat laga tandang seringkali menciptakan atmosfer yang tidak kalah magis dibandingkan menonton langsung di stadion. Ini membuktikan bahwa Persijap bukan sekadar klub sepak bola, melainkan identitas yang menyatukan masyarakat.\n\nPelatih Divaldo Alves pun mengapresiasi loyalitas ini. Menurutnya, tekanan dari suporter sendiri adalah motivasi positif agar tim selalu memberikan 100 persen di lapangan. Harapannya, energi positif dari Bumi Kartini bisa sampai ke telinga para pemain di lapangan hijau Maluku, memberikan kekuatan ekstra saat kaki mulai terasa lelah di menit-menit akhir pertandingan.\n\nMampukah kekuatan doa dan dukungan jarak jauh ini mengiringi Persijap membawa pulang poin penuh? Satu yang pasti, Laskar Kalinyamat tidak akan pernah berjuang sendirian!')">
+    
+    <img src="persijap.jpg" alt="Suporter Persijap">
+    <div class="card-body">
+        <span class="badge" style="background: #c0392b; color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px;">Loyalitas</span>
+        <h3 class="card-title" style="margin-top: 10px;">Jarak Bukan Halangan: Doa Suporter Mengalir ke Markas Lawan</h3>
+        <p class="card-text">Ribuan kilometer terbentang, namun semangat Banaspati & Jetman tetap bersama tim...</p>
+    </div>
+</div>
+
+
+
+
+
+        <section class="standings-section">
+            <h2 class="section-title">Klasemen Liga</h2>
+            <table class="standings-table">
+                <thead>
+                    <tr>
+                        <th>POS</th>
+                        <th>TIM</th>
+                        <th style="text-align: right;">PTS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td class="pos top-zone">1</td><td class="team-name">Persib Bandung</td><td class="pts">47</td></tr>
+                    <tr><td class="pos top-zone">2</td><td class="team-name">Borneo FC</td><td class="pts">43</td></tr>
+                    <tr><td class="pos">3</td><td class="team-name">Persija Jakarta</td><td class="pts">41</td></tr>
+                    <tr><td class="pos">4</td><td class="team-name">Malut United</td><td class="pts">37</td></tr>
+                    <tr><td class="pos">17</td><td class="team-name" style="color: #df0000; font-weight: bold;">Persijap Jepara</td>
+                      <td class="pts">12</td></tr>
+                </tbody>
+            </table>
+            <p style="text-align: center; font-size: 0.7rem; color: #aaa; margin-top: 20px;">© 2026 Kalinyamat Sector - Semua Hak Dilindungi</p>
+        </section>
+    </main>
+
+    <section id="story-page">
+    <button class="btn-back" onclick="goHome()">← Kembali</button>
+    <img id="story-img" src="" style="width: 100%; border-radius: 15px; height: 250px; object-fit: cover;">
+    <h1 id="story-title" style="margin: 20px 0;"></h1>
+    
+    <div id="story-text" style="color: #444; line-height: 1.8; white-space: pre-line;">
+        </div>
+</section>
+
+
+    <script>
+        // Loading Awal
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').style.opacity = '0';
+                setTimeout(() => document.getElementById('loader').style.display = 'none', 500);
+            }, 1200);
+        });
+
+        // Buka Berita dengan Animasi Loading
+        function showNews(title, imgSrc, storyContent) {
+    const cardLoader = document.getElementById('card-loader');
+    cardLoader.style.display = 'flex';
+
+    setTimeout(() => {
+        cardLoader.style.display = 'none';
+        document.getElementById('home-page').style.display = 'none';
+        document.getElementById('story-page').style.display = 'block';
+        
+        // Mengisi data secara dinamis
+        document.getElementById('story-title').innerText = title;
+        document.getElementById('story-img').src = imgSrc;
+        
+        // Mengisi teks berita yang berbeda (cari id story-text di langkah 2)
+        document.getElementById('story-text').innerHTML = storyContent;
+
+        window.scrollTo(0, 0);
+    }, 1200);
+}
+
+
+
+        // Kembali ke Home
+        function goHome() {
+    // 1. Sembunyikan halaman detail berita
+    document.getElementById('story-page').style.display = 'none';
+    
+    // 2. Tampilkan kembali halaman beranda/utama
+    document.getElementById('home-page').style.display = 'block';
+    
+    // 3. (Opsional) Scroll otomatis ke posisi paling atas beranda
+    window.scrollTo(0, 0);
+}
+
+    </script>
+</body>
+</html>
