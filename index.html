@@ -4,7 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kalinyamat Sector | Media Persijap Jepara</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
     <style>
+        header {
+    background: var(--dark);
+    padding: 10px 15px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between; /* Membuat logo mencar ke kanan & kiri */
+    align-items: center;
+    max-width: 600px; /* Sesuaikan dengan lebar mobile */
+    margin: 0 auto;
+}
+
+header h1 {
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    margin: 0;
+}
+
+.social-icon {
+    color: white;
+    font-size: 1.5rem; /* Ukuran icon */
+    text-decoration: none;
+    transition: 0.3s;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.social-icon:active {
+    transform: scale(0.9); /* Efek saat dipencet di HP */
+    color: var(--primary);
+}
+
+/* Warna spesifik saat ditekan (Opsional) */
+.fa-instagram:active { color: #E1306C; }
+.fa-tiktok:active { color: #00f2ea; }
+
         :root {
             --primary: #e63946;
             --dark: #1d3557;
@@ -124,7 +169,20 @@
 </div>
 
 
-    <header><h1>KALINYAMAT<span>SECTOR</span></h1></header>
+   <header>
+    <div class="header-content">
+        <a href="https://www.tiktok.com/@username_anda" target="_blank" class="social-icon">
+            <i class="fab fa-tiktok"></i>
+        </a>
+
+        <h1>KALINYAMAT<span>SECTOR</span></h1>
+
+        <a href="https://www.instagram.com/username_anda" target="_blank" class="social-icon">
+            <i class="fab fa-instagram"></i>
+        </a>
+    </div>
+</header>
+
 
     <main id="home-page">
         <div class="slider-container">
