@@ -7,6 +7,26 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
+        .result-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 10px;
+    border-bottom: 1px solid #f0f0f0;
+    background: #fff;
+}
+
+.result-item:last-child {
+    border-bottom: none;
+}
+
+.match-widget {
+    background: white;
+    margin: 15px;
+    border-radius: 8px; /* Lebih kotak sedikit agar mirip contoh */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    overflow: hidden;
+}
+
         header {
     background: var(--dark);
     padding: 10px 15px;
@@ -170,6 +190,30 @@ header h1 {
 
 
    <header>
+       <div class="match-widget">
+    <div class="match-header">Hasil Pertandingan</div>
+    
+    <div class="result-item">
+        <div class="m-team"><img src="logo-persijap.png" style="width:30px"></div>
+        <div style="flex:2; text-align:center;">
+            <div style="font-size:0.6rem; color:#999;">23/01/2026</div>
+            <div class="m-score" style="font-size:1.2rem;">0 - 1</div>
+            <div style="font-size:0.6rem;">BRI Liga 2</div>
+        </div>
+        <div class="m-team"><img src="logo-borneo.png" style="width:30px"></div>
+    </div>
+
+    <div class="result-item">
+        <div class="m-team"><img src="logo-semenpadang.png" style="width:30px"></div>
+        <div style="flex:2; text-align:center;">
+            <div style="font-size:0.6rem; color:#999;">11/01/2026</div>
+            <div class="m-score" style="font-size:1.2rem;">2 - 3</div>
+            <div style="font-size:0.6rem;">BRI Liga 2</div>
+        </div>
+        <div class="m-team"><img src="logo-persijap.png" style="width:30px"></div>
+    </div>
+</div>
+
     <div class="header-content">
         <a href="https://www.tiktok.com/@sector_of_kalinyamat" target="_blank" class="social-icon">
             <i class="fab fa-tiktok"></i>
@@ -249,6 +293,34 @@ header h1 {
             </table>
             <p style="text-align: center; font-size: 0.7rem; color: #aaa; margin-top: 20px;">© 2026 Kalinyamat Sector - Semua Hak Dilindungi</p>
         </section>
+            <div class="match-widget" style="margin-bottom: 30px;">
+    <div class="match-header">Next Match</div>
+    <div class="match-body">
+        <div class="match-teams">
+            <div class="m-team">
+                <img src="logo-persijap.png" alt="PJ">
+                <span>PERSIJAP</span>
+            </div>
+            <div class="m-detail">
+                Pekan 23<br>
+                <strong>01/03/2026</strong><br>
+                Manahan Solo
+            </div>
+            <div class="m-team">
+                <img src="logo-persik.png" alt="LWN">
+                <span>PERSIK</span>
+            </div>
+        </div>
+        
+        <div class="countdown-timer">
+            <div class="time-unit"><span class="time-val" id="days">15</span><span class="time-lab">Days</span></div>
+            <div class="time-unit"><span class="time-val" id="hours">03</span><span class="time-lab">Hrs</span></div>
+            <div class="time-unit"><span class="time-val" id="mins">35</span><span class="time-lab">Mins</span></div>
+            <div class="time-unit"><span class="time-val" id="secs">09</span><span class="time-lab">Secs</span></div>
+        </div>
+    </div>
+</div>
+
     </main>
 
     <section id="story-page">
