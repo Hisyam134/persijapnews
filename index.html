@@ -3,37 +3,240 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kalinyamat Sector | Media Persijap Jepara</title>
+    <title>Persijap News - Kalinyamat Sector</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
     <style>
-.match-widget {
-    background: white; /* Beri background putih agar kontras */
-    margin: 10px 15px 20px 15px; /* Beri jarak bawah agar tidak nempel ke berita */
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    overflow: hidden;
-}
+        :root {
+            --primary: #e63946;
+            --dark: #0a0e14;
+            --white: #ffffff;
+        }
 
-.result-item {
-    display: flex;
-    align-items: center;
-    padding: 12px;
-    background: #ffffff;
-    border-bottom: 1px solid #eee;
-}
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f0f2f5;
+        }
 
-/* Pastikan skor berwarna gelap agar terbaca di background putih */
-.m-score {
-    color: #333 !important; 
-    font-weight: 800;
-}
+        /* --- LOADING HANYA LOGO (BERSIH) --- */
+        #loader, #card-loader {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100vh;
+            background: rgba(10, 14, 20, 0.98); /* Background gelap solid agar logo menonjol */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
 
+        #card-loader { display: none; z-index: 10001; }
 
+        .logo-anim-img {
+            width: 120px; /* Ukuran logo saat loading sedikit lebih besar */
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.9); opacity: 0.7; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(0.9); opacity: 0.7; }
+        }
+
+        /* --- HEADER --- */
         header {
-    background: var(--dark);
-    padding: 10px 15px;
-    position: sticky;
+            background: var(--dark);
+            padding: 12px 15px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        header h1 { color: white; font-size: 1.1rem; margin: 0; letter-spacing: 1px; font-weight: bold; }
+        header h1 span { color: var(--primary); }
+        .social-icon { color: white; font-size: 1.3rem; text-decoration: none; width: 35px; text-align: center; }
+
+        /* --- WIDGET HASIL --- */
+        .match-widget {
+            background: #222;
+            margin: 15px;
+            border-radius: 10px;
+            color: white;
+            overflow: hidden;
+        }
+        .match-header { text-align: center; padding: 8px; font-size: 0.8rem; border-bottom: 1px solid #444; background: #000; font-weight: bold; }
+        .result-item { display: flex; align-items: center; padding: 15px; border-bottom: 1px solid #333; }
+        .m-score { flex: 2; text-align: center; font-size: 1.2rem; font-weight: bold; }
+
+        /* --- KLASEMEN --- */
+        .standing-card { background: white; margin: 15px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); overflow: hidden; }
+        .standing-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        .standing-table th { background: #f8f8f8; padding: 10px; text-align: left; color: #777; font-size: 0.7rem; text-transform: uppercase; }
+        .standing-table td { padding: 12px 10px; border-bottom: 1px solid #eee; }
+        .rank-col { width: 30px; font-weight: bold; text-align: center; }
+        .team-col { display: flex; align-items: center; gap: 10px; font-weight: bold; }
+        .team-col img { width: 25px; height: 25px; object-fit: contain; }
+        .pts-col { font-weight: 800; text-align: center; color: var(--primary); }
+        .highlight { background: #fff5f5; }
+
+        /* --- BERITA --- */
+        .section-title { margin: 20px 15px 10px; border-left: 4px solid var(--primary); padding-left: 10px; font-size: 1.1rem; font-weight: bold; }
+        .card { background: white; margin: 0 15px 15px; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .card img { width: 100%; height: 200px; object-fit: cover; }
+        .card-body { padding: 12px; }
+
+        /* --- NEXT MATCH --- */
+        .next-match-card { background: white; margin: 20px 15px 30px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); overflow: hidden; }
+        .nm-header { background: #000; color: white; padding: 10px; font-weight: bold; border-left: 4px solid var(--primary); font-size: 0.8rem; }
+        .nm-body { padding: 20px 10px; text-align: center; }
+        .nm-teams { display: flex; justify-content: space-around; align-items: center; margin-bottom: 15px; }
+        .nm-team img { width: 50px; height: 50px; object-fit: contain; }
+        .nm-countdown { display: flex; justify-content: center; gap: 15px; border-top: 1px solid #eee; padding-top: 15px; }
+        .cd-box span { display: block; font-size: 1.2rem; font-weight: bold; color: #222; }
+        .cd-box p { font-size: 0.6rem; margin: 0; color: #999; text-transform: uppercase; }
+
+        /* --- DETAIL PAGE --- */
+        #story-page { display: none; position: fixed; top: 0; width: 100%; height: 100%; background: white; z-index: 1000; overflow-y: auto; padding: 20px; box-sizing: border-box; }
+        .btn-back { background: #ddd; color: #333; border: none; padding: 8px 15px; border-radius: 5px; margin-bottom: 15px; }
+    </style>
+</head>
+<body>
+
+    <div id="loader">
+        <img src="logo-persijap.png" class="logo-anim-img" onerror="this.src='https://via.placeholder.com/100?text=LOGO'">
+    </div>
+
+    <div id="card-loader">
+        <img src="logo-persijap.png" class="logo-anim-img" style="width: 80px;">
+    </div>
+
+    <main id="home-page">
+        <header>
+            <div class="header-content">
+                <a href="https://www.tiktok.com/@kalinyamatsector" target="_blank" class="social-icon"><i class="fab fa-tiktok"></i></a>
+                <h1>KALINYAMAT<span>SECTOR</span></h1>
+                <a href="https://www.instagram.com/kalinyamatsector" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+            </div>
+        </header>
+
+        <div class="match-widget">
+            <div class="match-header">Hasil Pertandingan</div>
+            <div class="result-item">
+                <div class="m-team"><img src="logo-persijap.png" style="width:30px" onerror="this.src='https://via.placeholder.com/30'"></div>
+                <div class="m-score">
+                    <div style="font-size: 0.6rem; color: #888; font-weight: normal;">23/01/2026</div>
+                    0 - 1
+                    <div style="font-size: 0.6rem; color: #888; font-weight: normal;">BRI Liga 2</div>
+                </div>
+                <div class="m-team"><img src="logo-lawan.png" style="width:30px" onerror="this.src='https://via.placeholder.com/30'"></div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Klasemen Sementara</h2>
+        <div class="standing-card">
+            <table class="standing-table">
+                <thead>
+                    <tr><th class="rank-col">#</th><th>Klub</th><th style="text-align: center;">M</th><th class="pts-col">PTS</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="rank-col">1</td><td class="team-col"><img src="logo-lawan.png"> PSIM Jogja</td><td style="text-align: center;">10</td><td class="pts-col">24</td></tr>
+                    <tr class="highlight"><td class="rank-col">2</td><td class="team-col"><img src="logo-persijap.png"> Persijap Jepara</td><td style="text-align: center;">10</td><td class="pts-col">22</td></tr>
+                    <tr><td class="rank-col">3</td><td class="team-col"><img src="logo-lawan2.png"> Persiku Kudus</td><td style="text-align: center;">10</td><td class="pts-col">19</td></tr>
+                    <tr><td class="rank-col">4</td><td class="team-col"><img src="logo-lawan3.png"> Bhayangkara FC</td><td style="text-align: center;">10</td><td class="pts-col">18</td></tr>
+                    <tr><td class="rank-col">5</td><td class="team-col"><img src="logo-lawan4.png"> Persipa Pati</td><td style="text-align: center;">10</td><td class="pts-col">15</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2 class="section-title">Berita Terbaru</h2>
+        <div class="news-container">
+            <div class="card" onclick="showNews('Persijap Day!!', 'Screenshot_20260207_125907_Instagram.jpg', 'Persijap berhasil memenangkan pertandingan dramatis sore ini.')">
+                <img src="Screenshot_20260207_125907_Instagram.jpg" onerror="this.src='https://via.placeholder.com/400x200'">
+                <div class="card-body"><h3 style="margin:0; font-size: 0.95rem;">Persijap Day!! Menang Dramatis 2-1</h3></div>
+            </div>
+        </div>
+
+        <div class="next-match-card">
+            <div class="nm-header">Next Match</div>
+            <div class="nm-body">
+                <div class="nm-teams">
+                    <div class="nm-team"><img src="logo-persijap.png"><br>PERSIJAP</div>
+                    <div style="font-size: 0.7rem; color: #888;">01/03/2026<br>Manahan Solo</div>
+                    <div class="nm-team"><img src="logo-persik.png"><br>PERSIK</div>
+                </div>
+                <div id="countdown" class="nm-countdown">
+                    <div class="cd-box"><span id="days">00</span><p>Days</p></div>
+                    <div class="cd-box"><span id="hours">00</span><p>Hrs</p></div>
+                    <div class="cd-box"><span id="mins">00</span><p>Mins</p></div>
+                    <div class="cd-box"><span id="secs">00</span><p>Secs</p></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <section id="story-page">
+        <button class="btn-back" onclick="goHome()">← Kembali</button>
+        <img id="story-img" src="" style="width: 100%; border-radius: 10px; height: 230px; object-fit: cover;">
+        <h1 id="story-title" style="font-size: 1.3rem; margin: 15px 0;"></h1>
+        <div id="story-text" style="line-height: 1.6;"></div>
+    </section>
+
+    <script>
+        // Sembunyikan loading awal
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                document.getElementById('loader').style.opacity = '0';
+                setTimeout(() => { document.getElementById('loader').style.display = 'none'; }, 500);
+            }, 1500);
+            startCountdown();
+        });
+
+        // Buka berita dengan loading logo saja
+        function showNews(title, img, text) {
+            const cardLoader = document.getElementById('card-loader');
+            cardLoader.style.display = 'flex';
+            setTimeout(() => {
+                cardLoader.style.display = 'none';
+                document.getElementById('home-page').style.display = 'none';
+                document.getElementById('story-page').style.display = 'block';
+                document.getElementById('story-title').innerText = title;
+                document.getElementById('story-img').src = img;
+                document.getElementById('story-text').innerText = text;
+                window.scrollTo(0, 0);
+            }, 1000);
+        }
+
+        function goHome() {
+            document.getElementById('story-page').style.display = 'none';
+            document.getElementById('home-page').style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+
+        function startCountdown() {
+            const matchTime = new Date("March 1, 2026 15:30:00").getTime();
+            setInterval(() => {
+                const now = new Date().getTime();
+                const diff = matchTime - now;
+                if (diff > 0) {
+                    document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+                    document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+                    document.getElementById("mins").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+                    document.getElementById("secs").innerText = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, '0');
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
     top: 0;
     z-index: 100;
 }
