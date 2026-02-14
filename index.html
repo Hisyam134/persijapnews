@@ -7,25 +7,28 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
-        .result-item {
-    display: flex;
-    align-items: center;
-    padding: 15px 10px;
-    border-bottom: 1px solid #f0f0f0;
-    background: #fff;
-}
-
-.result-item:last-child {
-    border-bottom: none;
-}
-
 .match-widget {
-    background: white;
-    margin: 15px;
-    border-radius: 8px; /* Lebih kotak sedikit agar mirip contoh */
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    background: white; /* Beri background putih agar kontras */
+    margin: 10px 15px 20px 15px; /* Beri jarak bawah agar tidak nempel ke berita */
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     overflow: hidden;
 }
+
+.result-item {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    background: #ffffff;
+    border-bottom: 1px solid #eee;
+}
+
+/* Pastikan skor berwarna gelap agar terbaca di background putih */
+.m-score {
+    color: #333 !important; 
+    font-weight: 800;
+}
+
 
         header {
     background: var(--dark);
@@ -190,29 +193,7 @@ header h1 {
 
 
    <header>
-       <div class="match-widget">
-    <div class="match-header">Hasil Pertandingan</div>
-    
-    <div class="result-item">
-        <div class="m-team"><img src="logo-persijap.png" style="width:30px"></div>
-        <div style="flex:2; text-align:center;">
-            <div style="font-size:0.6rem; color:#999;">23/01/2026</div>
-            <div class="m-score" style="font-size:1.2rem;">0 - 1</div>
-            <div style="font-size:0.6rem;">BRI Liga 2</div>
-        </div>
-        <div class="m-team"><img src="logo-borneo.png" style="width:30px"></div>
-    </div>
 
-    <div class="result-item">
-        <div class="m-team"><img src="logo-semenpadang.png" style="width:30px"></div>
-        <div style="flex:2; text-align:center;">
-            <div style="font-size:0.6rem; color:#999;">11/01/2026</div>
-            <div class="m-score" style="font-size:1.2rem;">2 - 3</div>
-            <div style="font-size:0.6rem;">BRI Liga 2</div>
-        </div>
-        <div class="m-team"><img src="logo-persijap.png" style="width:30px"></div>
-    </div>
-</div>
 
     <div class="header-content">
         <a href="https://www.tiktok.com/@sector_of_kalinyamat" target="_blank" class="social-icon">
@@ -241,7 +222,22 @@ header h1 {
         </div>
 
         <div class="content">
-            <h2 class="section-title">Berita Terbaru</h2>
+            <div class="match-widget">
+    <div class="match-header">Hasil Pertandingan</div>
+    
+    <div class="result-item">
+        <div class="m-team"><img src="logo-persijap.png" onerror="this.src='https://via.placeholder.com/30'" style="width:30px"></div>
+        <div style="flex:2; text-align:center;">
+            <div style="font-size:0.6rem; color:#999;">23/01/2026</div>
+            <div class="m-score" style="font-size:1.2rem;">0 - 1</div>
+            <div style="font-size:0.6rem;">BRI Liga 2</div>
+        </div>
+        <div class="m-team"><img src="logo-lawan.png" onerror="this.src='https://via.placeholder.com/30'" style="width:30px"></div>
+    </div>
+</div>
+
+<h2 class="section-title" style="margin-left: 15px; margin-top: 20px;">Berita Terbaru</h2>
+  
             
 <div class="card" onclick="showNews(
     'Misi Curi Poin di Tanah Para Raja: Persijap Jepara Tantang Malut United Jumat Besok', 
@@ -293,33 +289,7 @@ header h1 {
             </table>
             <p style="text-align: center; font-size: 0.7rem; color: #aaa; margin-top: 20px;">© 2026 Kalinyamat Sector - Semua Hak Dilindungi</p>
         </section>
-            <div class="match-widget" style="margin-bottom: 30px;">
-    <div class="match-header">Next Match</div>
-    <div class="match-body">
-        <div class="match-teams">
-            <div class="m-team">
-                <img src="logo-persijap.png" alt="PJ">
-                <span>PERSIJAP</span>
-            </div>
-            <div class="m-detail">
-                Pekan 23<br>
-                <strong>01/03/2026</strong><br>
-                Manahan Solo
-            </div>
-            <div class="m-team">
-                <img src="logo-persik.png" alt="LWN">
-                <span>PERSIK</span>
-            </div>
-        </div>
-        
-        <div class="countdown-timer">
-            <div class="time-unit"><span class="time-val" id="days">15</span><span class="time-lab">Days</span></div>
-            <div class="time-unit"><span class="time-val" id="hours">03</span><span class="time-lab">Hrs</span></div>
-            <div class="time-unit"><span class="time-val" id="mins">35</span><span class="time-lab">Mins</span></div>
-            <div class="time-unit"><span class="time-val" id="secs">09</span><span class="time-lab">Secs</span></div>
-        </div>
-    </div>
-</div>
+            
 
     </main>
 
